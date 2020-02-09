@@ -1,13 +1,13 @@
-import { ItemsController } from './products.controller';
-import { ItemsService } from '../../services';
+import { ProductsController } from './products.controller';
+import { ProductService } from '../../services';
 
 describe('ItemsController', () => {
-  let itemsService: ItemsService;
-  let itemsController: ItemsController;
+  let itemsService: ProductService;
+  let itemsController: ProductsController;
 
   beforeEach(() => {
-    itemsService = new ItemsService();
-    itemsController = new ItemsController(itemsService);
+    itemsService = new ProductService();
+    itemsController = new ProductsController(itemsService);
   });
 
   describe('save', () => {
