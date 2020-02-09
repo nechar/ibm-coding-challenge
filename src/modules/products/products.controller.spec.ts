@@ -1,18 +1,18 @@
 import { ProductsController } from './products.controller';
 import { ProductService } from '../../services';
 
-describe('ItemsController', () => {
-  let itemsService: ProductService;
-  let itemsController: ProductsController;
+describe('ProductsController', () => {
+  let productService: ProductService;
+  let productsController: ProductsController;
 
   beforeEach(() => {
-    itemsService = new ProductService();
-    itemsController = new ProductsController(itemsService);
+    productService = new ProductService();
+    productsController = new ProductsController(productService);
   });
 
   describe('save', () => {
-    it('should be able to save an item', async () => {
-      const response = await itemsController.save({
+    it('should be able to save an product', async () => {
+      const response = await productsController.save({
         code: 'Vegemite Scroll',
         name: 'VS',
       });

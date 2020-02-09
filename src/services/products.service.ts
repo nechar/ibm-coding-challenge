@@ -4,7 +4,7 @@ import { CreateProductDTO } from '../models';
 export class ProductService {
   constructor() {}
 
-  async create(item: CreateProductDTO) {}
+  async create(createProductDTO: CreateProductDTO) {}
 
   async getAll() {}
 }

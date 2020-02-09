@@ -7,13 +7,13 @@ import {
 } from '../../models';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Items')
+@ApiTags('Products')
 @Controller()
 export class ItemsController {
-  constructor(private readonly itemsService: ProductService) {}
+  constructor(private readonly productService: ProductService) {}
 
-  @Post('items')
-  save(@Body() createItemDTO: CreateProductDTO) {
+  @Post('products')
+  save(@Body() createProductDTO: CreateProductDTO) {
     return {
       success: true,
     };
@@ -24,11 +24,11 @@ export class ItemsController {
     return packagingOptionDTO;
   }
 
-  @Get('items')
+  @Get('products')
   getAll() {
-    return this.itemsService.getAll();
+    return this.productService.getAll();
   }
 
-  @Put('items')
+  @Put('products')
   update(@Body() updateItemDTO: UpdateProductDTO) {}
 }
