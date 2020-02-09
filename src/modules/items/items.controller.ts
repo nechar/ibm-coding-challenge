@@ -1,6 +1,6 @@
-import { Controller, Get, Body, Put } from '@nestjs/common';
+import { Controller, Get, Body, Put, Post, Delete } from '@nestjs/common';
 import { ItemsService } from '../../services';
-import { UpdateItemDTO } from '../../models';
+import { CreateItemDTO, UpdateItemDTO, PackagingOptionDTO } from '../../models';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Items')
@@ -8,11 +8,23 @@ import { ApiTags } from '@nestjs/swagger';
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
-  @Put('items')
-  save(@Body() updateItemDTO: UpdateItemDTO) {}
+  @Post('items')
+  save(@Body() createItemDTO: CreateItemDTO) {
+    return {
+      success: true,
+    };
+  }
+
+  @Post('packagingOptions')
+  addOptions(@Body() packagingOptionDTO: PackagingOptionDTO) {
+    return packagingOptionDTO;
+  }
 
   @Get('items')
   getAll() {
     return this.itemsService.getAll();
   }
+
+  @Put('items')
+  update(@Body() updateItemDTO: UpdateItemDTO) {}
 }

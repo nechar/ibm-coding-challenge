@@ -1,6 +1,9 @@
+export interface PackagingOption {
+  count: number;
+  price: number;
+}
 export interface Item {
-  itemCode: string;
   name: string;
-  qty: number;
-  rate: number;
+  code: string;
+  packagingOptions: PackagingOption[];
 }
