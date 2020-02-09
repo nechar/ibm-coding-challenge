@@ -15,15 +15,27 @@ export class ProductsController {
 
   @Post('products')
   save(@Body() createProductDTO: CreateProductDTO) {
+    let success = true;
+    try {
+      this.productService.create(createProductDTO);
+    } catch {
+      success = false;
+    }
     return {
-      success: true,
+      success,
     };
   }
 
   @Post('packagingOptions')
   addOptions(@Body() packagingOptionDTO: PackagingOptionDTO) {
+    let success = true;
+    try {
+      this.productService.addOptions(packagingOptionDTO);
+    } catch {
+      success = false;
+    }
     return {
-      success: true,
+      success,
     };
   }
 
@@ -46,5 +58,15 @@ export class ProductsController {
   }
 
   @Delete('products')
-  delete(@Body() deleteProductDTO: DeleteProductDTO) {}
+  delete(@Body() deleteProductDTO: DeleteProductDTO) {
+    let success = true;
+    try {
+      this.productService.delete(deleteProductDTO);
+    } catch {
+      success = false;
+    }
+    return {
+      success,
+    };
+  }
 }
