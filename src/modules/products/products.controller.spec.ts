@@ -40,4 +40,14 @@ describe('ProductsController', () => {
       expect(response.success).toBeTruthy();
     });
   });
+
+  describe('delete', () => {
+    it('should be able to delete a product', async () => {
+      productsController.save(exampleProduct);
+      const response = productsController.delete({
+        code: 'VS',
+      });
+      expect(response.success).toBeTruthy();
+    });
+  });
 });
