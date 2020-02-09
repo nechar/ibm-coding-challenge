@@ -5,5 +5,5 @@ export interface PackagingOption {
 export interface Product {
   name: string;
   code: string;
-  packagingOptions: PackagingOption[];
+  packagingOptions?: PackagingOption[];
 }

@@ -4,6 +4,7 @@ import {
   CreateProductDTO,
   UpdateProductDTO,
   PackagingOptionDTO,
+  DeleteProductDTO,
 } from '../../models';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -21,7 +22,9 @@ export class ProductsController {
 
   @Post('packagingOptions')
   addOptions(@Body() packagingOptionDTO: PackagingOptionDTO) {
-    return packagingOptionDTO;
+    return {
+      success: true,
+    };
   }
 
   @Get('products')
@@ -31,4 +34,7 @@ export class ProductsController {
 
   @Put('products')
   update(@Body() updateProductDTO: UpdateProductDTO) {}
+
+  @Delete('products')
+  delete(@Body() deleteProductDTO: DeleteProductDTO) {}
 }

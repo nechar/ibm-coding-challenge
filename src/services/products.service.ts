@@ -1,10 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductDTO } from '../models';
+import { CreateProductDTO, Product } from '../models';
+import { exampleProduct } from '../data/exampleProduct';
 @Injectable()
 export class ProductService {
-  constructor() {}
+  products: Product[];
 
-  async create(createProductDTO: CreateProductDTO) {}
+  constructor() {
+    this.products = [exampleProduct];
+  }
 
-  async getAll() {}
+  getAll() {
+    return this.products;
+  }
+
+  create(createProductDTO: CreateProductDTO) {
+    this.products.push(createProductDTO);
+  }
 }
