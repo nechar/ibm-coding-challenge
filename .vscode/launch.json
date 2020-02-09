@@ -1,0 +1,24 @@
+{
+  /**
+   * Note:
+   * When using debug feature, the `watch` feature is disabled
+   * Which means, whenever you make any changes to the code,
+   * you will have to manually stop debuging and
+   * press F5 again to seee the changes you made
+   * If you know how to run debugging in watch mode, feel free to change the configuration.
+   */
+
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Nest Framework- No watch mode",
+      "args": ["${workspaceFolder}/src/main.ts"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector"
+    }
+  ]
+}
