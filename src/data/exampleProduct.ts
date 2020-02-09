@@ -1,4 +1,4 @@
 export const exampleProduct = {
-  code: 'Vegemite Scroll',
-  name: 'VS',
+  code: 'VS',
+  name: 'Vegemite Scroll',
 };

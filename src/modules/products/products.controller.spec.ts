@@ -29,4 +29,15 @@ describe('ProductsController', () => {
       expect(response.success).toBeTruthy();
     });
   });
+
+  describe('update', () => {
+    it('should be able to update a product', async () => {
+      productsController.save(exampleProduct);
+      const response = productsController.update({
+        code: 'VS',
+        name: 'New Name',
+      });
+      expect(response.success).toBeTruthy();
+    });
+  });
 });

@@ -33,7 +33,17 @@ export class ProductsController {
   }
 
   @Put('products')
-  update(@Body() updateProductDTO: UpdateProductDTO) {}
+  update(@Body() updateProductDTO: UpdateProductDTO) {
+    let success = true;
+    try {
+      this.productService.update(updateProductDTO);
+    } catch {
+      success = false;
+    }
+    return {
+      success,
+    };
+  }
 
   @Delete('products')
   delete(@Body() deleteProductDTO: DeleteProductDTO) {}
