@@ -19,6 +19,6 @@ export class UpdateProductDTO implements Partial<Product> {
   @ApiProperty() name: string;
 }
 
-export class DeleteItemDTO implements Partial<Product> {
+export class DeleteProductDTO implements Partial<Product> {
   @ApiProperty() code: string;
 }

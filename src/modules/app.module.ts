@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ItemsModule } from './products/products.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [ItemsModule],
+  imports: [ProductsModule],
   /**
    * Try NOT import any controller in the main module
    * Each module has their separate controllers.

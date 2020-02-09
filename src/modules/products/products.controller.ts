@@ -13,7 +13,7 @@ export class ProductsController {
   constructor(private readonly productService: ProductService) {}
 
   @Post('products')
-  save(@Body() createItemDTO: CreateProductDTO) {
+  save(@Body() createProductDTO: CreateProductDTO) {
     return {
       success: true,
     };
@@ -30,5 +30,5 @@ export class ProductsController {
   }
 
   @Put('products')
-  update(@Body() updateItemDTO: UpdateProductDTO) {}
+  update(@Body() updateProductDTO: UpdateProductDTO) {}
 }

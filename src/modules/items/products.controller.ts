@@ -9,7 +9,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Products')
 @Controller()
-export class ItemsController {
+export class ProductsController {
   constructor(private readonly productService: ProductService) {}
 
   @Post('products')
@@ -30,5 +30,5 @@ export class ItemsController {
   }
 
   @Put('products')
-  update(@Body() updateItemDTO: UpdateProductDTO) {}
+  update(@Body() updateProductDTO: UpdateProductDTO) {}
 }
