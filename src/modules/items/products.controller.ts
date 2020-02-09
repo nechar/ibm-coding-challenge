@@ -1,6 +1,10 @@
 import { Controller, Get, Body, Put, Post, Delete } from '@nestjs/common';
 import { ItemsService } from '../../services';
-import { CreateItemDTO, UpdateItemDTO, PackagingOptionDTO } from '../../models';
+import {
+  CreateProductDTO,
+  UpdateProductDTO,
+  PackagingOptionDTO,
+} from '../../models';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Items')
@@ -9,7 +13,7 @@ export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Post('items')
-  save(@Body() createItemDTO: CreateItemDTO) {
+  save(@Body() createItemDTO: CreateProductDTO) {
     return {
       success: true,
     };
@@ -26,5 +30,5 @@ export class ItemsController {
   }
 
   @Put('items')
-  update(@Body() updateItemDTO: UpdateItemDTO) {}
+  update(@Body() updateItemDTO: UpdateProductDTO) {}
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateItemDTO } from '../models';
+import { CreateProductDTO } from '../models';
 @Injectable()
 export class ItemsService {
   constructor() {}
 
-  async create(item: CreateItemDTO) {}
+  async create(item: CreateProductDTO) {}
 
   async getAll() {}
 }

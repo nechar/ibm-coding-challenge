@@ -1,4 +1,4 @@
-import { ItemsController } from './items.controller';
+import { ItemsController } from './products.controller';
 import { ItemsService } from '../../services';
 
 describe('ItemsController', () => {

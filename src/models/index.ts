@@ -1,3 +1,3 @@
 /** Item */
-export * from './item/item.dto';
-export * from './item/item.interface';
+export * from './item/product.dto';
+export * from './item/product.interface';

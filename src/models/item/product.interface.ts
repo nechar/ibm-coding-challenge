@@ -2,7 +2,7 @@ export interface PackagingOption {
   count: number;
   price: number;
 }
-export interface Item {
+export interface Product {
   name: string;
   code: string;
   packagingOptions: PackagingOption[];

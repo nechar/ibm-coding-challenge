@@ -1,9 +1,9 @@
 // tslint:disable: max-classes-per-file
 
 import { ApiProperty } from '@nestjs/swagger';
-import { Item, PackagingOption } from './item.interface';
+import { Product, PackagingOption } from './product.interface';
 
-export class CreateItemDTO implements Partial<Item> {
+export class CreateProductDTO implements Partial<Product> {
   @ApiProperty() code: string;
   @ApiProperty() name: string;
 }
@@ -14,11 +14,11 @@ export class PackagingOptionDTO implements Partial<PackagingOption> {
   @ApiProperty() price: number;
 }
 
-export class UpdateItemDTO implements Partial<Item> {
+export class UpdateProductDTO implements Partial<Product> {
   @ApiProperty() code: string;
   @ApiProperty() name: string;
 }
 
-export class DeleteItemDTO implements Partial<Item> {
+export class DeleteItemDTO implements Partial<Product> {
   @ApiProperty() code: string;
 }
