@@ -8,12 +8,12 @@ import {
 } from '../../models';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Products')
+@ApiTags('Product')
 @Controller()
 export class ProductsController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post('products')
+  @Post('product')
   save(@Body() createProductDTO: CreateProductDTO) {
     let success = true;
     try {
@@ -39,12 +39,12 @@ export class ProductsController {
     };
   }
 
-  @Get('products')
+  @Get('all-products')
   getAll() {
     return this.productService.getAll();
   }
 
-  @Put('products')
+  @Put('product')
   update(@Body() updateProductDTO: UpdateProductDTO) {
     let success = true;
     try {
@@ -57,7 +57,7 @@ export class ProductsController {
     };
   }
 
-  @Delete('products')
+  @Delete('product')
   delete(@Body() deleteProductDTO: DeleteProductDTO) {
     let success = true;
     try {
