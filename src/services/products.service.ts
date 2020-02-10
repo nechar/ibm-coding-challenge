@@ -5,6 +5,7 @@ import {
   UpdateProductDTO,
   DeleteProductDTO,
   PackagingOptionDTO,
+  CreateOrderDTO,
 } from '../models';
 import { exampleProduct } from '../data/exampleProduct';
 @Injectable()
@@ -55,4 +56,6 @@ export class ProductService {
       throw new Error(`Could not find the product`);
     }
   }
+
+  makeOrder(createOrderDTO: CreateOrderDTO) {}
 }
