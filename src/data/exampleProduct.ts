@@ -1,5 +1,5 @@
 export const exampleProduct = {
-  code: 'VS',
-  name: 'Vegemite Scroll',
+  code: 'EG',
+  name: 'Example Product',
   packagingOptions: [],
 };

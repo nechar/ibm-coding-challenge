@@ -22,7 +22,7 @@ describe('ProductsController', () => {
     it('should be able to add packaging Options to a saved item', async () => {
       productsController.save(exampleProduct);
       const response = productsController.addOptions({
-        code: 'VS',
+        code: 'EG',
         count: 5,
         price: 5,
       });
@@ -34,7 +34,7 @@ describe('ProductsController', () => {
     it('should be able to update a product', async () => {
       productsController.save(exampleProduct);
       const response = productsController.update({
-        code: 'VS',
+        code: 'EG',
         name: 'New Name',
       });
       expect(response.success).toBeTruthy();
@@ -45,7 +45,7 @@ describe('ProductsController', () => {
     it('should be able to delete a product', async () => {
       productsController.save(exampleProduct);
       const response = productsController.delete({
-        code: 'VS',
+        code: 'EG',
       });
       expect(response.success).toBeTruthy();
     });
