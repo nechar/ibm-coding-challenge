@@ -26,10 +26,10 @@ export class ProductService {
 
   addOptions(packagingOptionDTO: PackagingOptionDTO) {
     try {
+      const { count, price, code } = packagingOptionDTO;
       const productIndex = this.products.findIndex(
-        (product) => product.code === packagingOptionDTO.code,
+        (product) => product.code === code,
       );
-      const { count, price } = packagingOptionDTO;
       this.products[productIndex].packagingOptions.push({ count, price });
     } catch {
       throw new Error(`Could not find the product`);
@@ -57,5 +57,23 @@ export class ProductService {
     }
   }
 
-  makeOrder(createOrderDTO: CreateOrderDTO) {}
+  makeOrder(createOrderDTO: CreateOrderDTO) {
+    try {
+      const { quantity, code } = createOrderDTO;
+      const productIndex = this.products.findIndex(
+        (product) => product.code === code,
+      );
+
+      const product = this.products[productIndex];
+
+      console.log('product', product);
+
+      const packagingOptionsCount = product.packagingOptions.map(
+        (packagingOptions) => packagingOptions.count,
+      );
+      console.log('packagingOptionsCount', packagingOptionsCount);
+    } catch {
+      throw new Error(`Could not find the product`);
+    }
+  }
 }

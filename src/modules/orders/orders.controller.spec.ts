@@ -15,7 +15,7 @@ describe('OrdersController', () => {
     it('should be able to make an order', async () => {
       const response = ordersController.create({
         code: 'EG',
-        count: 1,
+        quantity: 1,
       });
       expect(response.success).toBeTruthy();
     });

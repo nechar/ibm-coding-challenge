@@ -5,5 +5,5 @@ import { Order } from './order.interface';
 
 export class CreateOrderDTO implements Partial<Order> {
   @ApiProperty() code: string;
-  @ApiProperty() count: number;
+  @ApiProperty() quantity: number;
 }
