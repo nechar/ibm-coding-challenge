@@ -1,8 +1,3 @@
 {
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#220000",
-    "titleBar.activeBackground": "#220000",
-    "statusBar.background": "#220000"
-  },
   "cSpell.words": ["fieldname", "mimetype", "nestjs", "originalname"]
 }

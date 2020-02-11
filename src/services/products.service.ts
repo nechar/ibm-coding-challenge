@@ -61,12 +61,12 @@ export class ProductService {
   makeOrder(createOrderDTO: CreateOrderDTO) {
     try {
       const { quantity, code } = createOrderDTO;
+      const packages: number[] = [];
       console.log('quantity', quantity);
 
       const productIndex = this.products.findIndex(
         (product) => product.code === code,
       );
-
       const product = this.products[productIndex];
 
       console.log('product', product);
@@ -77,16 +77,19 @@ export class ProductService {
 
       // Optional
       packagingOptionsCount.sort((a, b) => b - a);
-
-      // const sorted = this.sort(packagingOptionsCount);
       console.log('packagingOptionsCount', packagingOptionsCount);
-      // console.log('sorted', sorted);
+      while (this.getSum(packages) === quantity) {
+        packages.push(packagingOptionsCount[0]);
+      }
     } catch {
       throw new Error(`Could not find the product`);
     }
   }
 
   getSum(numberArray: number[]): number {
+    if (numberArray.length === 0) {
+      return 0;
+    }
     return numberArray.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
     );
