@@ -6,6 +6,7 @@ import {
   DeleteProductDTO,
   PackagingOptionDTO,
   CreateOrderDTO,
+  OrderResponse,
 } from '../models';
 import { exampleProduct } from '../data/exampleProduct';
 @Injectable()
@@ -56,10 +57,12 @@ export class ProductService {
       throw new Error(`Could not find the product`);
     }
   }
-
+  // : OrderResponse
   makeOrder(createOrderDTO: CreateOrderDTO) {
     try {
       const { quantity, code } = createOrderDTO;
+      console.log('quantity', quantity);
+
       const productIndex = this.products.findIndex(
         (product) => product.code === code,
       );
@@ -71,9 +74,21 @@ export class ProductService {
       const packagingOptionsCount = product.packagingOptions.map(
         (packagingOptions) => packagingOptions.count,
       );
+
+      // Optional
+      packagingOptionsCount.sort((a, b) => b - a);
+
+      // const sorted = this.sort(packagingOptionsCount);
       console.log('packagingOptionsCount', packagingOptionsCount);
+      // console.log('sorted', sorted);
     } catch {
       throw new Error(`Could not find the product`);
     }
+  }
+
+  getSum(numberArray: number[]): number {
+    return numberArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+    );
   }
 }
