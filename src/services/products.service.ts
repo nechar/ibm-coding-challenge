@@ -57,41 +57,11 @@ export class ProductService {
       throw new Error(`Could not find the product`);
     }
   }
-  // : OrderResponse
-  makeOrder(createOrderDTO: CreateOrderDTO) {
-    try {
-      const { quantity, code } = createOrderDTO;
-      const packages: number[] = [];
-      console.log('quantity', quantity);
 
-      const productIndex = this.products.findIndex(
-        (product) => product.code === code,
-      );
-      const product = this.products[productIndex];
-
-      console.log('product', product);
-
-      const packagingOptionsCount = product.packagingOptions.map(
-        (packagingOptions) => packagingOptions.count,
-      );
-
-      // Optional
-      packagingOptionsCount.sort((a, b) => b - a);
-      console.log('packagingOptionsCount', packagingOptionsCount);
-      while (this.getSum(packages) === quantity) {
-        packages.push(packagingOptionsCount[0]);
-      }
-    } catch {
-      throw new Error(`Could not find the product`);
-    }
-  }
-
-  getSum(numberArray: number[]): number {
-    if (numberArray.length === 0) {
-      return 0;
-    }
-    return numberArray.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
+  findProduct(code) {
+    const productIndex = this.products.findIndex(
+      (product) => product.code === code,
     );
+    return this.products[productIndex];
   }
 }

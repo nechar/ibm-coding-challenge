@@ -12,12 +12,32 @@ export class OrdersController {
   create(@Body() createOrderDTO: CreateOrderDTO) {
     let success = true;
     try {
-      this.productService.makeOrder(createOrderDTO);
+      const product = this.productService.findProduct(createOrderDTO.code);
+
+      const packages: number[] = [];
+      const packagingOptionsCount = product.packagingOptions.map(
+        (packagingOptions) => packagingOptions.count,
+      );
+
+      // Optional
+      packagingOptionsCount.sort((a, b) => b - a);
+      while (this.getSum(packages) === createOrderDTO.quantity) {
+        packages.push(packagingOptionsCount[0]);
+      }
     } catch {
       success = false;
     }
     return {
       success,
     };
+  }
+
+  getSum(numberArray: number[]): number {
+    if (numberArray.length === 0) {
+      return 0;
+    }
+    return numberArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+    );
   }
 }
