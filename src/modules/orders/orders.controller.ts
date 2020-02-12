@@ -15,28 +15,29 @@ export class OrdersController {
     try {
       const product = this.productService.findProduct(createOrderDTO.code);
       let currentIndex = 0;
-      let numberOfSplice = 1;
-      let cartIndex = 0;
       let noOfItemInCart = 0;
       while (noOfItemInCart !== createOrderDTO.quantity) {
-        if (product.packagingOptions.length >= currentIndex) {
-          cart.push(product.packagingOptions[currentIndex].count);
+        if (product.packagingOptions.length < currentIndex) {
+          /* Overflow */
+          currentIndex--;
+          cart.splice(-2);
         } else {
-          numberOfSplice++;
+          /* No Overflow */
+          if (noOfItemInCart > createOrderDTO.quantity) {
+            currentIndex++;
+            cart.push(product.packagingOptions[currentIndex].count);
+          } else {
+            cart.pop();
+          }
         }
         noOfItemInCart = this.getSum(cart);
-        if (noOfItemInCart > createOrderDTO.quantity) {
-          cart.splice(-numberOfSplice);
-          numberOfSplice++;
-          currentIndex++;
-        }
       }
     } catch {
       success = false;
     }
     return {
       success,
-      packages: cart,
+      cart,
     };
   }
 
