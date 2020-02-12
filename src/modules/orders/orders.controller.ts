@@ -18,7 +18,6 @@ export class OrdersController {
       let numberOfSplice = 1;
       let cartIndex = 0;
       let noOfItemInCart = 0;
-      // Optional
       while (noOfItemInCart !== createOrderDTO.quantity) {
         if (product.packagingOptions.length >= currentIndex) {
           cart.push(product.packagingOptions[currentIndex].count);
