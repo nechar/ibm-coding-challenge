@@ -11,21 +11,33 @@ export class OrdersController {
   @Post('order')
   create(@Body() createOrderDTO: CreateOrderDTO) {
     let success = true;
+    const cart: number[] = [];
     try {
       const product = this.productService.findProduct(createOrderDTO.code);
-
-      const packages: number[] = [];
-
+      let currentIndex = 0;
+      let numberOfSplice = 1;
+      let cartIndex = 0;
+      let noOfItemInCart = 0;
       // Optional
-      // packagingOptionsCount.sort((a, b) => b - a);
-      // while (this.getSum(packages) === createOrderDTO.quantity) {
-      //   packages.push(packagingOptionsCount[0]);
-      // }
+      while (noOfItemInCart !== createOrderDTO.quantity) {
+        if (product.packagingOptions.length >= currentIndex) {
+          cart.push(product.packagingOptions[currentIndex].count);
+        } else {
+          numberOfSplice++;
+        }
+        noOfItemInCart = this.getSum(cart);
+        if (noOfItemInCart > createOrderDTO.quantity) {
+          cart.splice(-numberOfSplice);
+          numberOfSplice++;
+          currentIndex++;
+        }
+      }
     } catch {
       success = false;
     }
     return {
       success,
+      packages: cart,
     };
   }
 
