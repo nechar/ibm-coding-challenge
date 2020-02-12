@@ -15,15 +15,12 @@ export class OrdersController {
       const product = this.productService.findProduct(createOrderDTO.code);
 
       const packages: number[] = [];
-      const packagingOptionsCount = product.packagingOptions.map(
-        (packagingOptions) => packagingOptions.count,
-      );
 
       // Optional
-      packagingOptionsCount.sort((a, b) => b - a);
-      while (this.getSum(packages) === createOrderDTO.quantity) {
-        packages.push(packagingOptionsCount[0]);
-      }
+      // packagingOptionsCount.sort((a, b) => b - a);
+      // while (this.getSum(packages) === createOrderDTO.quantity) {
+      //   packages.push(packagingOptionsCount[0]);
+      // }
     } catch {
       success = false;
     }

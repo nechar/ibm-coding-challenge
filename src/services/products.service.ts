@@ -58,10 +58,13 @@ export class ProductService {
     }
   }
 
-  findProduct(code) {
-    const productIndex = this.products.findIndex(
-      (product) => product.code === code,
+  findProduct(code): Product {
+    const foundProduct = this.products.find((product) => product.code === code);
+    // Sort by descending order based on the count
+    const sorted = foundProduct.packagingOptions.sort(
+      (a, b) => b.count - a.count,
     );
-    return this.products[productIndex];
+    foundProduct.packagingOptions = sorted;
+    return foundProduct;
   }
 }
