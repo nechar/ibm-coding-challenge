@@ -1,6 +1,7 @@
 import { Controller, Body, Post } from '@nestjs/common';
 import { ProductService } from '../../services';
-import { CreateOrderDTO, PackagingOption } from '../../models';
+import { CreateOrderDTO, PackagingOption, Product } from '../../models';
+import { fillTheCart } from './cart.helper';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Product')
@@ -10,59 +11,31 @@ export class OrdersController {
 
   @Post('order')
   create(@Body() createOrderDTO: CreateOrderDTO) {
-    let success = false;
     let cart: PackagingOption[] = [];
+    let product: Product;
+
     try {
-      const product = this.productService.findProduct(createOrderDTO.code);
-      let packagingOptionsIndex = 0;
-      let packagingOptionsIndexNext = 1;
-      let noOfItemInCart = 0;
-      let numberOfCurrentItem = 0;
-
-      while (packagingOptionsIndexNext <= product.packagingOptions.length) {
-        cart.push(product.packagingOptions[packagingOptionsIndex]);
-        noOfItemInCart = this.getNoOfItemInCart(cart);
-        numberOfCurrentItem++;
-
-        if (noOfItemInCart === createOrderDTO.quantity) {
-          /** Condition was satisfied */
-          success = true;
-          break;
-        }
-
-        if (noOfItemInCart >= createOrderDTO.quantity) {
-          /* There are more items in the cart than what was ordered */
-
-          if (packagingOptionsIndex + 1 === product.packagingOptions.length) {
-            /** Current index cycle has finished */
-            cart.splice(-(numberOfCurrentItem + 1));
-            packagingOptionsIndex = packagingOptionsIndexNext;
-            packagingOptionsIndexNext++;
-          } else {
-            cart.pop();
-            packagingOptionsIndex++;
-          }
-          numberOfCurrentItem = 0;
-        }
-      }
+      product = this.productService.findProduct(createOrderDTO.code);
     } catch {
-      success = false;
+      return {
+        success: false,
+        message: `Couldn't find the product`,
+      };
     }
-    if (!success) {
-      cart = [];
+
+    try {
+      cart = fillTheCart(product, createOrderDTO.quantity);
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message,
+      };
     }
 
     return {
-      success,
+      success: true,
       cart,
+      message: `Thank you for shopping with us`,
     };
-  }
-
-  getNoOfItemInCart(numberArray: PackagingOption[]): number {
-    let sum = 0;
-    numberArray.forEach((option) => {
-      sum += option.count;
-    });
-    return sum;
   }
 }
