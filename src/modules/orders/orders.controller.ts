@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Put, Post, Delete } from '@nestjs/common';
+import { Controller, Body, Post } from '@nestjs/common';
 import { ProductService } from '../../services';
 import { CreateOrderDTO } from '../../models';
 import { ApiTags } from '@nestjs/swagger';
@@ -21,7 +21,7 @@ export class OrdersController {
       let attempt = 0;
       while (++attempt < 100) {
         cart.push(product.packagingOptions[packagingOptionsIndex].count);
-        noOfItemInCart = this.getSum(cart);
+        noOfItemInCart = this.getNoOfItemInCart(cart);
         numberOfCurrentItem++;
 
         if (noOfItemInCart === createOrderDTO.quantity) {
@@ -35,7 +35,7 @@ export class OrdersController {
           if (packagingOptionsIndex + 1 === product.packagingOptions.length) {
             /** Current index cycle has finished */
             cart.splice(-(numberOfCurrentItem + 1));
-            if (Math.floor(Math.random() * 2) == 0) {
+            if (Math.floor(Math.random())) {
               packagingOptionsIndex--;
             }
           } else {
@@ -54,7 +54,7 @@ export class OrdersController {
     };
   }
 
-  getSum(numberArray: number[]): number {
+  getNoOfItemInCart(numberArray: number[]): number {
     if (numberArray.length === 0) {
       return 0;
     }
