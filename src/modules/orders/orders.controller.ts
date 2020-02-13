@@ -14,29 +14,30 @@ export class OrdersController {
     const cart: number[] = [];
     try {
       const product = this.productService.findProduct(createOrderDTO.code);
-      let currentIndex = 0;
+      let packagingOptionsIndex = 0;
       let noOfItemInCart = 0;
       while (true) {
-        cart.push(product.packagingOptions[currentIndex].count);
+        cart.push(product.packagingOptions[packagingOptionsIndex].count);
         noOfItemInCart = this.getSum(cart);
 
         if (noOfItemInCart === createOrderDTO.quantity) {
+          /** Condition was satisfied */
           break;
         }
 
         if (noOfItemInCart >= createOrderDTO.quantity) {
-          // more in the bag
+          /* There are more items in the cart than what was ordered */
 
-          if (currentIndex + 1 === product.packagingOptions.length) {
-            /* Overflow */
-            cart.splice(-2);
-            currentIndex--;
+          if (packagingOptionsIndex + 1 === product.packagingOptions.length) {
+            /** Current index cycle has finished */
+            cart.pop();
+            cart.pop();
+            packagingOptionsIndex--;
           } else {
             cart.pop();
-            currentIndex++;
+            packagingOptionsIndex++;
           }
         }
-        // less in the bag
       }
     } catch {
       success = false;
