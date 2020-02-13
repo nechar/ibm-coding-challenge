@@ -3,16 +3,12 @@ export const exampleProduct = {
   name: 'Example Product',
   packagingOptions: [
     {
-      count: 4,
-      price: 4,
-    },
-    {
       count: 3,
-      price: 3,
+      price: 6.99,
     },
     {
-      count: 2,
-      price: 2,
+      count: 5,
+      price: 8.99,
     },
   ],
 };

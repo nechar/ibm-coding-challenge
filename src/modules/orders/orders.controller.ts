@@ -16,9 +16,13 @@ export class OrdersController {
       const product = this.productService.findProduct(createOrderDTO.code);
       let packagingOptionsIndex = 0;
       let noOfItemInCart = 0;
-      while (true) {
+      let numberOfCurrentItem = 0;
+
+      let attempt = 0;
+      while (++attempt < 100) {
         cart.push(product.packagingOptions[packagingOptionsIndex].count);
         noOfItemInCart = this.getSum(cart);
+        numberOfCurrentItem++;
 
         if (noOfItemInCart === createOrderDTO.quantity) {
           /** Condition was satisfied */
@@ -30,13 +34,15 @@ export class OrdersController {
 
           if (packagingOptionsIndex + 1 === product.packagingOptions.length) {
             /** Current index cycle has finished */
-            cart.pop();
-            cart.pop();
-            packagingOptionsIndex--;
+            cart.splice(-(numberOfCurrentItem + 1));
+            if (Math.floor(Math.random() * 2) == 0) {
+              packagingOptionsIndex--;
+            }
           } else {
             cart.pop();
             packagingOptionsIndex++;
           }
+          numberOfCurrentItem = 0;
         }
       }
     } catch {
