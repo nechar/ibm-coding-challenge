@@ -5,16 +5,14 @@ import {
   UpdateProductDTO,
   DeleteProductDTO,
   PackagingOptionDTO,
-  CreateOrderDTO,
-  OrderResponse,
 } from '../models';
-import { exampleProduct } from '../data/exampleProduct';
+import { defaultProducts } from '../data/defaultProducts';
 @Injectable()
 export class ProductService {
   products: Product[];
 
   constructor() {
-    this.products = [exampleProduct];
+    this.products = defaultProducts;
   }
 
   getAll() {
