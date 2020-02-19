@@ -20,6 +20,12 @@ export class ProductService {
   }
 
   create(createProductDTO: CreateProductDTO) {
+    const existingProduct = this.products.find(
+      (product) => product.code === createProductDTO.code,
+    );
+    if (existingProduct) {
+      throw new Error(`Product already exist`);
+    }
     this.products.push({ ...createProductDTO, packagingOptions: [] });
   }
 

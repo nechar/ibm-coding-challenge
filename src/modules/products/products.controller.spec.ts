@@ -50,4 +50,12 @@ describe('ProductsController', () => {
       expect(response.success).toBeTruthy();
     });
   });
+
+  describe('product', () => {
+    it('should NOT be able add a product with a duplicate ID', async () => {
+      productsController.save(exampleProduct);
+      const response = productsController.save(exampleProduct);
+      expect(response.success).toBeFalsy();
+    });
+  });
 });
